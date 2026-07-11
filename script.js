@@ -1,4 +1,4 @@
-
+// Step 1: Selecting elements from the HTML
 const interviewCountEl = document.getElementById('interviewCount');
 const rejectedCountEl = document.getElementById('rejectedCount');
 const totalCountEl = document.getElementById('totalCount');
@@ -6,103 +6,114 @@ const jobContainer = document.getElementById('jobContainer');
 const jobNumber = document.getElementById('jobNumber');
 const emptyState = document.getElementById('emptyState');
 
-
-const allTab = document.getElementById('allTab');
-const interviewTab = document.getElementById('interview');
-const rejectedTab = document.getElementById('rejected');
-
-
+// Variables for counting
 let interviewCount = 0;
 let rejectedCount = 0;
 
-
-jobContainer.addEventListener('click', function(e) {
-    const card = e.target.closest('.job-card');
+// Step 2: Handling button clicks
+jobContainer.addEventListener('click', function(event) {
+    const target = event.target;
+    const card = target.closest('.job-card');
     if (!card) return;
-
     const statusSpan = card.querySelector('.statu');
 
-    if (e.target.classList.contains('interview-btn')) {
+    // Logic for Interview button
+    if (target.classList.contains('interview-btn')) {
         if (card.dataset.status !== 'interview') {
-            if (card.dataset.status === 'rejected') rejectedCount--;
-            interviewCount++;
+            // Adjust counters if switching status
+            if (card.dataset.status === 'rejected') {
+                rejectedCount = rejectedCount - 1;
+            }
+            interviewCount = interviewCount + 1;
+            
             card.dataset.status = 'interview';
-            updateUI(card, statusSpan, 'INTERVIEW', 'bg-green-100', 'text-green-700');
+            statusSpan.innerText = 'INTERVIEW';
+            statusSpan.className = 'statu px-5 py-3 rounded-lg font-semibold bg-green-100 text-green-700';
+            
+            updateDashboard();
         }
     }
 
-
-    else if (e.target.classList.contains('rejected-btn')) {
+    // Logic for Rejected button
+    else if (target.classList.contains('rejected-btn')) {
         if (card.dataset.status !== 'rejected') {
-            if (card.dataset.status === 'interview') interviewCount--;
-            rejectedCount++;
+            // Adjust counters if switching status
+            if (card.dataset.status === 'interview') {
+                interviewCount = interviewCount - 1;
+            }
+            rejectedCount = rejectedCount + 1;
+
             card.dataset.status = 'rejected';
-            updateUI(card, statusSpan, 'REJECTED', 'bg-red-100', 'text-red-700');
+            statusSpan.innerText = 'REJECTED';
+            statusSpan.className = 'statu px-5 py-3 rounded-lg font-semibold bg-red-100 text-red-700';
+            
+            updateDashboard();
         }
     }
 
-  
-    else if (e.target.closest('.delete-btn')) {
-        if (card.dataset.status === 'interview') interviewCount--;
-        if (card.dataset.status === 'rejected') rejectedCount--;
-        card.remove();
+    // Logic for Delete button
+    else if (target.closest('.delete-btn')) {
+        // Reduce counts before removing
+        if (card.dataset.status === 'interview') interviewCount = interviewCount - 1;
+        if (card.dataset.status === 'rejected') rejectedCount = rejectedCount - 1;
+        
+        card.remove(); // Removing the card
+        
         updateDashboard();
-        updateJobTotal();
+        updateTotalJobs();
     }
 });
 
-
-const tabs = [allTab, interviewTab, rejectedTab];
-
-tabs.forEach(tab => {
-    tab.addEventListener('click', function() {
-
-        document.querySelector('.tab-active').classList.remove('tab-active');
-        this.classList.add('tab-active');
-        const filter = this.id === 'allTab' ? 'all' : (this.id === 'interview' ? 'interview' : 'rejected');
-        filterJobs(filter);
-    });
-});
-
-function filterJobs(status) {
-    const cards = document.querySelectorAll('.job-card');
-    let visibleCount = 0;
-    cards.forEach(card => {
-        if (status === 'all' || card.dataset.status === status) {
-            card.classList.remove('hidden');
-            visibleCount++;
-        } else {
-            card.classList.add('hidden');
-        }
-    });
-
-    if (visibleCount === 0) {
-        emptyState.classList.remove('hidden');
-    } else {
-        emptyState.classList.add('hidden');
-    }
-}
-
-
-function updateUI(card, span, text, bgClass, textClass) {
-    span.innerText = text;
-    span.className = `statu px-5 py-3 rounded-lg font-semibold ${bgClass} ${textClass}`;
-    updateDashboard();
-}
-
+// Step 3: Functions to update 
 function updateDashboard() {
     interviewCountEl.innerText = interviewCount;
     rejectedCountEl.innerText = rejectedCount;
 }
 
-function updateJobTotal() {
-    const remainingCards = document.querySelectorAll('.job-card').length;
-    jobNumber.innerText = `${remainingCards} Jobs`;
-    totalCountEl.innerText = remainingCards;
+function updateTotalJobs() {
+    const allCards = document.querySelectorAll('.job-card');
+    const total = allCards.length;
     
-    if (remainingCards === 0) {
+    // Update label
+    jobNumber.innerText = total + " Jobs";
+    totalCountEl.innerText = total;
+    
+    // Check if any jobs are left
+    if (total === 0) {
         emptyState.classList.remove('hidden');
-    } else {
-        emptyState.classList.add('hidden');
     }
 }
+
+// Step 4: Tab Filtering Logic
+const allTab = document.getElementById('allTab');
+const interviewTab = document.getElementById('interview');
+const rejectedTab = document.getElementById('rejected');
+
+// Function to handle tab clicks
+function handleTabClick(status) {
+    const cards = document.querySelectorAll('.job-card');
+    
+    for (let i = 0; i < cards.length; i++) {
+        const card = cards[i];
+        
+        if (status === 'all') {
+            card.classList.remove('hidden');
+        } 
+        else if (card.dataset.status === status) {
+            card.classList.remove('hidden');
+        } 
+        else {
+            card.classList.add('hidden');
+        }
+    }
+}
+
+allTab.addEventListener('click', function() {
+    handleTabClick('all');
+});
+interviewTab.addEventListener('click', function() {
+    handleTabClick('interview');
+});
+rejectedTab.addEventListener('click', function() {
+    handleTabClick('rejected');
+});
