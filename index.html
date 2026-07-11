@@ -22,7 +22,7 @@
 
 
 </head>
-<body class="bg-base-200 pt-5 pb-5 p-20">
+<body class="bg-base-200 px-4 md:px-10 lg:px-20 p-5">
     
     <header class="text-2xl font-bold mb-8">
         <h1 class="pb-5">Job Application Tracker</h1>
@@ -41,7 +41,7 @@
                 <div class="card bg-white">
                     <div class="card-body">
                         <h2 class="text-lg">Interview</h2>
-                        <p id="InterviewCount" class="text-4xl text-green-300 font-bold ">0</p>
+                        <p id="interviewCount" class="text-4xl text-green-300 font-bold ">0</p>
                     </div>
                 </div>
 
@@ -50,7 +50,7 @@
                 <div class="card bg-white">
                     <div class="card-body">
                         <h2 class="text-lg">Rejected</h2>
-                        <p id="Count" class="text-4xl text-red-300 font-bold">0</p>
+                        <p id="rejectedCount" class="text-4xl text-red-300 font-bold">0</p>
                     </div>
                 </div>
 
@@ -74,11 +74,11 @@
         <div class="tabs tabs-boxed w-fit gap-5 mb-8">
             <button id="allTab" class=" btn flex-col h-full py-2 btn-primary btn-soft tab tab-active">All</button>
             
-            <button id="interview" class=" btn flex-col h-full py-2 btn-primary btn-soft tab tab-active">
+            <button id="interview" class=" btn flex-col h-full py-2 btn-primary btn-soft tab">
                 Interview
             </button>
 
-            <button id="rejected" class=" btn flex-col h-full py-2 btn-primary btn-soft tab tab-active">
+            <button id="rejected" class=" btn flex-col h-full py-2 btn-primary btn-soft tab">
                 Rejected
             </button>
         </div>
@@ -86,10 +86,12 @@
     </section>
 
 
-    <section class="grid grid-cols-1 gap-6 mt-8">
+    <section id="jobContainer" class="grid grid-cols-1 gap-6 mt-8">
         <!-- Job Card -->
 
-        <div class="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm gap-5">
+        <div class="job-card bg-white border border-gray-200 rounded-2xl p-8 shadow-sm"
+        data-id="1"
+        data-status="all">
 
             <div class="flex justify-between items-start">
                 <div>
@@ -97,7 +99,7 @@
                     <p class="text-gray-500 mt-2 text-lg">React Native Developer</p>
                 </div>
 
-                    <button class="btn btn-circle btn-sm btn-ghost border border-gray-200">
+                    <button class="delete-btn btn btn-circle btn-sm btn-ghost border border-gray-200">
                         <i class="fa-regular fa-trash-can text-gray-500"></i>
                     </button>
 
@@ -112,22 +114,24 @@
             </div>
 
             <div class="mt-8">
-                <span class="bg-[#EEF4FF] text-[#0F3D77] px-5 py-3 rounded-lg font-semibold">NOT APPLIED</span>
+                <span class="statu bg-[#EEF4FF] text-[#0F3D77] px-5 py-3 rounded-lg font-semibold">NOT APPLIED</span>
             </div>
 
             <p class="mt-8  text-gray-700">Build cross-platform mobile applications using React Native.
             Work on products used by millions of users worldwide.</p>
 
             <div class="mt-8 flex gap-4">
-                <button class="btn bg-white border-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white rounded-lg px-8">INTERVIEW</button>
-                <button class="btn bg-white border-2 border-red-500 text-red-600 hover:bg-red-500 hover:text-white rounded-lg px-8">REJECTED</button>
+                <button class="interview-btn btn bg-white border-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white rounded-lg px-8">INTERVIEW</button>
+                <button class="rejected-btn btn bg-white border-2 border-red-500 text-red-600 hover:bg-red-500 hover:text-white rounded-lg px-8">REJECTED</button>
             </div>
 
         </div>
 
 
 
-        <div class="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+        <div class="job-card bg-white border border-gray-200 rounded-2xl p-8 shadow-sm"
+        data-id="2"
+        data-status="all">
 
             <div class="flex justify-between items-start">
                 <div>
@@ -135,7 +139,7 @@
                     <p class="text-gray-500 mt-2 text-lg">Web Designer & Developer</p>
                 </div>
 
-                    <button class="btn btn-circle btn-sm btn-ghost border border-gray-200">
+                    <button class="delete-btn btn btn-circle btn-sm btn-ghost border border-gray-200">
                         <i class="fa-regular fa-trash-can text-gray-500"></i>
                     </button>
 
@@ -150,20 +154,22 @@
             </div>
 
             <div class="mt-8">
-                <span class="bg-[#EEF4FF] text-[#0F3D77] px-5 py-3 rounded-lg font-semibold">NOT APPLIED</span>
+                <span class="statu bg-[#EEF4FF] text-[#0F3D77] px-5 py-3 rounded-lg font-semibold">NOT APPLIED</span>
             </div>
 
             <p class="mt-8  text-gray-700">Create stunning web experiences for high-profile clients. Must have portfolio and experience with modern web design trends.</p>
 
             <div class="mt-8 flex gap-4">
-                <button class="btn bg-white border-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white rounded-lg px-8">INTERVIEW</button>
-                <button class="btn bg-white border-2 border-red-500 text-red-600 hover:bg-red-500 hover:text-white rounded-lg px-8">REJECTED</button>
+                <button class="interview-btn btn bg-white border-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white rounded-lg px-8">INTERVIEW</button>
+                <button class="rejected-btn btn bg-white border-2 border-red-500 text-red-600 hover:bg-red-500 hover:text-white rounded-lg px-8">REJECTED</button>
             </div>
 
         </div>
 
 
-        <div class="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+        <div class="job-card bg-white border border-gray-200 rounded-2xl p-8 shadow-sm"
+        data-id="3"
+        data-status="all">
 
             <div class="flex justify-between items-start">
                 <div>
@@ -171,7 +177,7 @@
                     <p class="text-gray-500 mt-2 text-lg">Data Visualization Specialist</p>
                 </div>
 
-                    <button class="btn btn-circle btn-sm btn-ghost border border-gray-200">
+                    <button class="delete-btn btn btn-circle btn-sm btn-ghost border border-gray-200">
                         <i class="fa-regular fa-trash-can text-gray-500"></i>
                     </button>
 
@@ -186,20 +192,22 @@
             </div>
 
             <div class="mt-8">
-                <span class="bg-[#EEF4FF] text-[#0F3D77] px-5 py-3 rounded-lg font-semibold">NOT APPLIED</span>
+                <span class="statu bg-[#EEF4FF] text-[#0F3D77] px-5 py-3 rounded-lg font-semibold">NOT APPLIED</span>
             </div>
 
             <p class="mt-8  text-gray-700">Transform complex data into compelling visualizations. Required skills: D3.js, React, and strong analytical thinking.</p>
 
             <div class="mt-8 flex gap-4">
-                <button class="btn bg-white border-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white rounded-lg px-8">INTERVIEW</button>
-                <button class="btn bg-white border-2 border-red-500 text-red-600 hover:bg-red-500 hover:text-white rounded-lg px-8">REJECTED</button>
+                <button class="interview-btn btn bg-white border-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white rounded-lg px-8">INTERVIEW</button>
+                <button class="rejected-btn btn bg-white border-2 border-red-500 text-red-600 hover:bg-red-500 hover:text-white rounded-lg px-8">REJECTED</button>
             </div>
 
         </div>
 
 
-        <div class="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+        <div class="job-card bg-white border border-gray-200 rounded-2xl p-8 shadow-sm"
+        data-id="4"
+        data-status="all">
 
             <div class="flex justify-between items-start">
                 <div>
@@ -207,7 +215,7 @@
                     <p class="text-gray-500 mt-2 text-lg">Backend Developer</p>
                 </div>
 
-                    <button class="btn btn-circle btn-sm btn-ghost border border-gray-200">
+                    <button class="delete-btn btn btn-circle btn-sm btn-ghost border border-gray-200">
                         <i class="fa-regular fa-trash-can text-gray-500"></i>
                     </button>
 
@@ -222,19 +230,21 @@
             </div>
 
             <div class="mt-8">
-                <span class="bg-[#EEF4FF] text-[#0F3D77] px-5 py-3 rounded-lg font-semibold">NOT APPLIED</span>
+                <span class="statu bg-[#EEF4FF] text-[#0F3D77] px-5 py-3 rounded-lg font-semibold">NOT APPLIED</span>
             </div>
 
             <p class="mt-8  text-gray-700">Design and maintain scalable backend systems using Python and AWS. Work with modern DevOps practices and cloud infrastructure.</p>
 
             <div class="mt-8 flex gap-4">
-                <button class="btn bg-white border-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white rounded-lg px-8">INTERVIEW</button>
-                <button class="btn bg-white border-2 border-red-500 text-red-600 hover:bg-red-500 hover:text-white rounded-lg px-8">REJECTED</button>
+                <button class="interview-btn btn bg-white border-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white rounded-lg px-8">INTERVIEW</button>
+                <button class="rejected-btn btn bg-white border-2 border-red-500 text-red-600 hover:bg-red-500 hover:text-white rounded-lg px-8">REJECTED</button>
             </div>
 
         </div>
 
-        <div class="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+        <div class="job-card bg-white border border-gray-200 rounded-2xl p-8 shadow-sm"
+        data-id="5"
+        data-status="all">
 
             <div class="flex justify-between items-start">
                 <div>
@@ -242,7 +252,7 @@
                     <p class="text-gray-500 mt-2 text-lg">UI/UX Engineer</p>
                 </div>
 
-                    <button class="btn btn-circle btn-sm btn-ghost border border-gray-200">
+                    <button class="delete-btn btn btn-circle btn-sm btn-ghost border border-gray-200">
                         <i class="fa-regular fa-trash-can text-gray-500"></i>
                     </button>
 
@@ -257,19 +267,21 @@
             </div>
 
             <div class="mt-8">
-                <span class="bg-[#EEF4FF] text-[#0F3D77] px-5 py-3 rounded-lg font-semibold">NOT APPLIED</span>
+                <span class="statu bg-[#EEF4FF] text-[#0F3D77] px-5 py-3 rounded-lg font-semibold">NOT APPLIED</span>
             </div>
 
             <p class="mt-8  text-gray-700">Create beautiful and functional user interfaces for our suite of products. Strong design skills and frontend development expertise required.</p>
 
             <div class="mt-8 flex gap-4">
-                <button class="btn bg-white border-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white rounded-lg px-8">INTERVIEW</button>
-                <button class="btn bg-white border-2 border-red-500 text-red-600 hover:bg-red-500 hover:text-white rounded-lg px-8">REJECTED</button>
+                <button class="interview-btn btn bg-white border-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white rounded-lg px-8">INTERVIEW</button>
+                <button class="rejected-btn btn bg-white border-2 border-red-500 text-red-600 hover:bg-red-500 hover:text-white rounded-lg px-8">REJECTED</button>
             </div>
 
         </div>
 
-        <div class="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+        <div class="job-card bg-white border border-gray-200 rounded-2xl p-8 shadow-sm"
+        data-id="6"
+        data-status="all">
 
             <div class="flex justify-between items-start">
                 <div>
@@ -277,7 +289,7 @@
                     <p class="text-gray-500 mt-2 text-lg">JavaScript Developer</p>
                 </div>
 
-                    <button class="btn btn-circle btn-sm btn-ghost border border-gray-200">
+                    <button class="delete-btn btn btn-circle btn-sm btn-ghost border border-gray-200">
                         <i class="fa-regular fa-trash-can text-gray-500"></i>
                     </button>
 
@@ -292,19 +304,21 @@
             </div>
 
             <div class="mt-8">
-                <span class="bg-[#EEF4FF] text-[#0F3D77] px-5 py-3 rounded-lg font-semibold">NOT APPLIED</span>
+                <span class="statu bg-[#EEF4FF] text-[#0F3D77] px-5 py-3 rounded-lg font-semibold">NOT APPLIED</span>
             </div>
 
             <p class="mt-8  text-gray-700">Build enterprise applications with JavaScript and modern frameworks. We offer competitive compensation, health insurance, and professional development opportunities.</p>
 
             <div class="mt-8 flex gap-4">
-                <button class="btn bg-white border-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white rounded-lg px-8">INTERVIEW</button>
-                <button class="btn bg-white border-2 border-red-500 text-red-600 hover:bg-red-500 hover:text-white rounded-lg px-8">REJECTED</button>
+                <button class="interview-btn btn bg-white border-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white rounded-lg px-8">INTERVIEW</button>
+                <button class="rejected-btn btn bg-white border-2 border-red-500 text-red-600 hover:bg-red-500 hover:text-white rounded-lg px-8">REJECTED</button>
             </div>
 
         </div>
 
-        <div class="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+        <div class="job-card bg-white border border-gray-200 rounded-2xl p-8 shadow-sm"
+        data-id="7"
+        data-status="all">
 
             <div class="flex justify-between items-start">
                 <div>
@@ -312,7 +326,7 @@
                     <p class="text-gray-500 mt-2 text-lg">Full Stack Engineer</p>
                 </div>
 
-                    <button class="btn btn-circle btn-sm btn-ghost border border-gray-200">
+                    <button class="delete-btn btn btn-circle btn-sm btn-ghost border border-gray-200">
                         <i class="fa-regular fa-trash-can text-gray-500"></i>
                     </button>
 
@@ -327,19 +341,21 @@
             </div>
 
             <div class="mt-8">
-                <span class="bg-[#EEF4FF] text-[#0F3D77] px-5 py-3 rounded-lg font-semibold">NOT APPLIED</span>
+                <span class="statu bg-[#EEF4FF] text-[#0F3D77] px-5 py-3 rounded-lg font-semibold">NOT APPLIED</span>
             </div>
 
             <p class="mt-8  text-gray-700">Join our fast-growing startup and work on our core platform. Experience with Node.js and React required. Great benefits and equity package included.</p>
 
             <div class="mt-8 flex gap-4">
-                <button class="btn bg-white border-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white rounded-lg px-8">INTERVIEW</button>
-                <button class="btn bg-white border-2 border-red-500 text-red-600 hover:bg-red-500 hover:text-white rounded-lg px-8">REJECTED</button>
+                <button class="interview-btn btn bg-white border-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white rounded-lg px-8">INTERVIEW</button>
+                <button class="rejected-btn btn bg-white border-2 border-red-500 text-red-600 hover:bg-red-500 hover:text-white rounded-lg px-8">REJECTED</button>
             </div>
 
         </div>
 
-        <div class="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+        <div class="job-card bg-white border border-gray-200 rounded-2xl p-8 shadow-sm"
+        data-id="8"
+        data-status="all">
 
             <div class="flex justify-between items-start">
                 <div>
@@ -347,7 +363,7 @@
                     <p class="text-gray-500 mt-2 text-lg">Senior Frontend Developer</p>
                 </div>
 
-                    <button class="btn btn-circle btn-sm btn-ghost border border-gray-200">
+                    <button class="delete-btn btn btn-circle btn-sm btn-ghost border border-gray-200">
                         <i class="fa-regular fa-trash-can text-gray-500"></i>
                     </button>
 
@@ -362,19 +378,31 @@
             </div>
 
             <div class="mt-8">
-                <span class="bg-[#EEF4FF] text-[#0F3D77] px-5 py-3 rounded-lg font-semibold">NOT APPLIED</span>
+                <span class="statu bg-[#EEF4FF] text-[#0F3D77] px-5 py-3 rounded-lg font-semibold">NOT APPLIED</span>
             </div>
 
             <p class="mt-8  text-gray-700">We are looking for an experienced Frontend Developer to build scalable web applications using React and TypeScript. You will work with a talented team on cutting-edge projects.</p>
 
             <div class="mt-8 flex gap-4">
-                <button class="btn bg-white border-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white rounded-lg px-8">INTERVIEW</button>
-                <button class="btn bg-white border-2 border-red-500 text-red-600 hover:bg-red-500 hover:text-white rounded-lg px-8">REJECTED</button>
+                <button class="interview-btn btn bg-white border-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white rounded-lg px-8">INTERVIEW</button>
+                <button class="rejected-btn btn bg-white border-2 border-red-500 text-red-600 hover:bg-red-500 hover:text-white rounded-lg px-8">REJECTED</button>
             </div>
 
         </div>
 
+
+
+        <div id="emptyState" class="hidden text-center py-20">
+            <img class="mx-auto w-44" src="jobs.png" alt="">
+            <h2 class="font-bold text-3xl mt-5">No Jobs Available</h2>
+            <p class="text-gray-500">There are no jobs in this category</p>
+
+        </div>
+
     </section>
+
+
+    <script src="script.js"></script>
 
 </body>
 </html>
