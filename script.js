@@ -1,4 +1,4 @@
-// Step 1: Selecting elements from the HTML
+// Select the elements from the HTML
 const interviewCountEl = document.getElementById('interviewCount');
 const rejectedCountEl = document.getElementById('rejectedCount');
 const totalCountEl = document.getElementById('totalCount');
@@ -6,26 +6,26 @@ const jobContainer = document.getElementById('jobContainer');
 const jobNumber = document.getElementById('jobNumber');
 const emptyState = document.getElementById('emptyState');
 
-// Variables for counting
+// Initialize the counters
 let interviewCount = 0;
 let rejectedCount = 0;
 
-// Step 2: Handling button clicks
+// Job card button click handler 
 jobContainer.addEventListener('click', function(event) {
     const target = event.target;
     const card = target.closest('.job-card');
-    if (!card) return;
+
+    if (!card) return; 
+
     const statusSpan = card.querySelector('.statu');
 
-    // Logic for Interview button
+    // 1. Handling Interview Button
     if (target.classList.contains('interview-btn')) {
         if (card.dataset.status !== 'interview') {
-            // Adjust counters if switching status
             if (card.dataset.status === 'rejected') {
                 rejectedCount = rejectedCount - 1;
             }
-            interviewCount = interviewCount + 1;
-            
+            interviewCount = interviewCount + 1; 
             card.dataset.status = 'interview';
             statusSpan.innerText = 'INTERVIEW';
             statusSpan.className = 'statu px-5 py-3 rounded-lg font-semibold bg-green-100 text-green-700';
@@ -34,10 +34,9 @@ jobContainer.addEventListener('click', function(event) {
         }
     }
 
-    // Logic for Rejected button
+    // 2. Handling Rejected Button
     else if (target.classList.contains('rejected-btn')) {
         if (card.dataset.status !== 'rejected') {
-            // Adjust counters if switching status
             if (card.dataset.status === 'interview') {
                 interviewCount = interviewCount - 1;
             }
@@ -51,69 +50,73 @@ jobContainer.addEventListener('click', function(event) {
         }
     }
 
-    // Logic for Delete button
+    // 3. Handling Delete Button
     else if (target.closest('.delete-btn')) {
-        // Reduce counts before removing
         if (card.dataset.status === 'interview') interviewCount = interviewCount - 1;
         if (card.dataset.status === 'rejected') rejectedCount = rejectedCount - 1;
         
-        card.remove(); // Removing the card
-        
+        card.remove(); // Remove the element
         updateDashboard();
         updateTotalJobs();
     }
 });
 
-// Step 3: Functions to update 
+// Update the Dashboard Numbers
 function updateDashboard() {
     interviewCountEl.innerText = interviewCount;
     rejectedCountEl.innerText = rejectedCount;
 }
 
+// Update the total jobs counts and check for the empty state
 function updateTotalJobs() {
     const allCards = document.querySelectorAll('.job-card');
     const total = allCards.length;
     
-    // Update label
     jobNumber.innerText = total + " Jobs";
     totalCountEl.innerText = total;
     
-    // Check if any jobs are left
     if (total === 0) {
         emptyState.classList.remove('hidden');
+    } else {
+        emptyState.classList.add('hidden');
     }
 }
 
-// Step 4: Tab Filtering Logic
+// Tab Filtering Logic
 const allTab = document.getElementById('allTab');
 const interviewTab = document.getElementById('interview');
 const rejectedTab = document.getElementById('rejected');
 
-// Function to handle tab clicks
-function handleTabClick(status) {
+function filterJobs(status) {
     const cards = document.querySelectorAll('.job-card');
-    
+    let visibleCount = 0;
+
     for (let i = 0; i < cards.length; i++) {
         const card = cards[i];
         
-        if (status === 'all') {
+        // Show/Hide based on status
+        if (status === 'all' || card.dataset.status === status) {
             card.classList.remove('hidden');
-        } 
-        else if (card.dataset.status === status) {
-            card.classList.remove('hidden');
-        } 
-        else {
+            visibleCount = visibleCount + 1;
+        } else {
             card.classList.add('hidden');
         }
+    }
+    if (visibleCount === 0) {
+        emptyState.classList.remove('hidden');
+    } else {
+        emptyState.classList.add('hidden');
     }
 }
 
 allTab.addEventListener('click', function() {
-    handleTabClick('all');
+    filterJobs('all');
 });
+
 interviewTab.addEventListener('click', function() {
-    handleTabClick('interview');
+    filterJobs('interview');
 });
+
 rejectedTab.addEventListener('click', function() {
-    handleTabClick('rejected');
+    filterJobs('rejected');
 });
