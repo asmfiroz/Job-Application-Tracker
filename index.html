@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payoo | Home</title>
+    <title>Job Application Tracker</title>
     <link rel="shortcut icon" href="jobs.png" type="image/x-icon">
 
     <!-- Tailwind+ Daisy -->
@@ -22,12 +22,68 @@
 
 
 </head>
-<body class="mid-h-screen bg-base-200 mx-auto py-5">
+<body class="bg-base-200 pt-5 pb-5 p-20">
     
-    <header class="border-b-2 border-gray-300  ">
-        <h2 class="font-bold text-2xl">Job Application Tracker</h2>
-        
+    <header class="text-2xl font-bold mb-8">
+        <h1 class="pb-5">Job Application Tracker</h1>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <div>
+                <div class="card bg-white">
+                    <div class="card-body">
+                        <h2 class="text-lg">Total jobs</h2>
+                        <p id="totalCount" class="text-4xl font-bold">8</p>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <div class="card bg-white">
+                    <div class="card-body">
+                        <h2 class="text-lg">Interview</h2>
+                        <p id="InterviewCount" class="text-4xl text-green-300 font-bold ">0</p>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <div class="card bg-white">
+                    <div class="card-body">
+                        <h2 class="text-lg">Rejected</h2>
+                        <p id="Count" class="text-4xl text-red-300 font-bold">0</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <p class="border-b-2 border-gray-300 pt-5 pb-5"></p>
+
     </header>
+
+    <!-- Available jobs -->
+     <section class="mt-10">
+        <div class="flex justify-between items-center mb-5">
+            <h2 class="font-bold text-gray-600">Available Jobs</h2>
+            <span id="jobNumber" >8 Jobs</span>
+        </div>
+
+        <!-- tabs -->
+
+        <div class="tabs tabs-boxed w-fit gap-5 mb-8">
+            <button id="allTab" class=" btn flex-col h-full py-2 btn-primary btn-soft tab tab-active">All</button>
+            
+            <button id="interview" class=" btn flex-col h-full py-2 btn-primary btn-soft tab tab-active">
+                Interview
+            </button>
+
+            <button id="rejected" class=" btn flex-col h-full py-2 btn-primary btn-soft tab tab-active">
+                Rejected
+            </button>
+        </div>
+        
+     </section>
 
 </body>
 </html>
